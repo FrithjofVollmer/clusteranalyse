@@ -9,9 +9,9 @@
 #
 #
 # Das folgende kommentierte Skript gibt die Befehlskette für eine zweifache
-# Clusteranalyse von performanzbezogenen Daten wieder, wie sie zur Analyse
-# von Messdaten zu 57 Aufnahmen von Beethovens Violinkonzert op. 61
-# verwendet wurde.
+# Clusteranalyse von performanzbezogenen Daten wieder, wie sie vom Autor 
+# zur Analyse von Messdaten zu 57 Aufnahmen von Beethovens Violinkonzert 
+# op. 61 (1912–1956) verwendet wurde.
 #
 #
 # Zentrale Pakete und Funktionen:
@@ -35,8 +35,8 @@
 # "_CVect"      CSV mit Vektoren der Clusterzentren 
 # "_mitCluster" ursprünglicher Datensatz als CSV, pro Datenpunkt ergänzt um 
 #               Clusterzugehörigkeit
-# "PCA"         Hauptkomponentenanalysen zur Interpretation der Cluster
-#               (Visualisierung 2PC und 3PC im 2D- und 3D-Scatterplot)
+# "_PCA"         Hauptkomponentenanalysen zur Interpretation der Cluster
+#               (Visualisierung 2PC und 3PC als 2D- und 3D-Scatterplot)
 #
 ################################################################################
 
@@ -485,7 +485,7 @@ library(scatterplot3d)
 if (!requireNamespace("scatterplot3d", quietly = TRUE)) install.packages("scatterplot3d")
 library(scatterplot3d) 
 
-pdf("PCA.pdf")
+pdf(paste(output_name, "_PCA.pdf"))
 
 # kMeans-PCA
 pca_result <- prcomp(data_numeric, center = TRUE, scale. = TRUE) #PCA durchführen
