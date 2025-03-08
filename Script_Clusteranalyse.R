@@ -58,11 +58,11 @@ setwd("~/Desktop/Clusteranalysen B61/cantabile final/Tests")
 # Ausgaben zu verwenden) und "data" (Quelldatensatz): Den unten gegebenen Pfad  
 # "cantabile_data.csv" durch den eigenen CSV-Datensatz im Arbeitsverzeichnis ersetzen
 # (geht auch mit anderen Dateiformaten wie etwa TXT, dann über "read.table"). In 
-# diesen Einstellungen enthalten die Werte nach kontinentaleuropäischem Standard 
-# Kommata (",") als Dezimaltrennzeichen und sind durch Semikolons (";") voneinander 
-# getrennt. Wird zur Datensatzerstellung z.B. mit einer englischsprachigen Version 
-# von Excel gearbeitet, werden die Dateien evtl. mit Punkten (".") als 
-# Dezimaltrennzeichen und Kommata als Separatoren (",") ausgegeben. Die Werte 
+# diesen Einstellungen enthalten die Werte nach internationalem Standard 
+# Punkte (".") als Dezimaltrennzeichen und sind durch Kommata (",") voneinander 
+# getrennt. Wird zur Datensatzerstellung z.B. mit einer deutschsprachigen Version 
+# von Excel gearbeitet, werden die Dateien evtl. mit Kommata (",") als 
+# Dezimaltrennzeichen und Semikolons als Separatoren (";") ausgegeben. Die Werte 
 # für die Argumente "sep" und "dec" sind dann entsprechend anzupassen. Wenn es 
 # im Datensatz keine Kopfzeile für Spaltennamen gibt: "header = FALSE". "row.names"
 # gibt die Zahl der Spalten mit Zeilennamen (Labels pro Datenpunkt) an, die für 
@@ -81,7 +81,7 @@ set_file_name <- function(file_path) {
 output_name <- set_file_name(file_path)
 
 # Einlesen des Quelldatensatzes
-data <- read.csv(file_path,  header = TRUE, 
+data <- read.csv(file_path,  header = TRUE, sep = ",", dec = ".", 
                  row.names = 1)
 
 # Fehlermeldung, falls der Datensatz nicht-numerische  Spalten enthält (k-Means 
