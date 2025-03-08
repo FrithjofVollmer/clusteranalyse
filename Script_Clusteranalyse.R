@@ -35,7 +35,7 @@
 # "_CVect"      CSV mit Vektoren der Clusterzentren 
 # "_mitCluster" ursprünglicher Datensatz als CSV, pro Datenpunkt ergänzt um 
 #               Clusterzugehörigkeit
-# "_PCA"         Hauptkomponentenanalysen zur Interpretation der Cluster
+# "_PCA"        Hauptkomponentenanalysen zur Interpretation der Cluster
 #               (Visualisierung 2PC und 3PC als 2D- und 3D-Scatterplot)
 #
 ################################################################################
