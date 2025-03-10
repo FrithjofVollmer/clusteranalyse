@@ -399,84 +399,6 @@ check_csv_cluster_assignments(
 )
 
 
-### Ergänzung ANOVA ###########################################################
-
-# ANOVA für Cluster basierend auf k-Means und k-Medoids
-anova_results <- data.frame(Variable = character(), 
-                            Cluster_Method = character(), 
-                            Df = integer(), 
-                            SumSq = numeric(), 
-                            MeanSq = numeric(), 
-                            FValue = numeric(), 
-                            Pr_F = numeric(), 
-                            stringsAsFactors = FALSE)
-
-# ANOVA für k-Means
-for (i in 1:ncol(data_numeric)) {
-  anova_result <- summary(aov(data_numeric[, i] ~ factor(data$Cluster_kMeans)))
-  df <- anova_result[[1]]$Df[1]
-  sum_sq <- anova_result[[1]]$`Sum Sq`[1]
-  mean_sq <- anova_result[[1]]$`Mean Sq`[1]
-  f_value <- anova_result[[1]]$`F value`[1]
-  p_value <- anova_result[[1]]$`Pr(>F)`[1]
-  
-  anova_results <- rbind(anova_results, 
-                         data.frame(Variable = colnames(data_numeric)[i],
-                                    Cluster_Method = "k-Means",
-                                    Df = df, 
-                                    SumSq = sum_sq, 
-                                    MeanSq = mean_sq, 
-                                    FValue = f_value, 
-                                    Pr_F = p_value))
-}
-
-# ANOVA für k-Medoids
-for (i in 1:ncol(data_numeric)) {
-  anova_result <- summary(aov(data_numeric[, i] ~ factor(data$Cluster_kMedoids)))
-  df <- anova_result[[1]]$Df[1]
-  sum_sq <- anova_result[[1]]$`Sum Sq`[1]
-  mean_sq <- anova_result[[1]]$`Mean Sq`[1]
-  f_value <- anova_result[[1]]$`F value`[1]
-  p_value <- anova_result[[1]]$`Pr(>F)`[1]
-  
-  anova_results <- rbind(anova_results, 
-                         data.frame(Variable = colnames(data_numeric)[i],
-                                    Cluster_Method = "k-Medoids",
-                                    Df = df, 
-                                    SumSq = sum_sq, 
-                                    MeanSq = mean_sq, 
-                                    FValue = f_value, 
-                                    Pr_F = p_value))
-}
-
-# Ausgabe der ANOVA-Ergebnisse als CSV
-write.csv2(anova_results, file = paste0(output_name, "_ANOVA.csv"), row.names = FALSE)
-
-# Funktion zur Überprüfung der p-Werte der ANOVA
-check_anova_p_values <- function(anova_csv_path) {
-  # Einlesen der ANOVA-Ergebnisse aus der CSV-Datei
-  anova_results <- read.csv2(anova_csv_path, header = TRUE, sep = ";", dec = ",")
-  
-  # Überprüfung auf p-Werte über 0,05
-  high_p_values <- anova_results[anova_results$Pr_F > 0.05, ]
-  
-  if (nrow(high_p_values) > 0) {
-    warning(paste("Die ANOVA-Ergebnisse zeigen, dass einige Variablen keinen signifikanten Unterschied zwischen den Clustern aufweisen (p > 0.05):",
-                  paste(high_p_values$Variable, collapse = ", "), 
-                  ". Bitte überprüfen Sie die betroffenen Variablen."))
-  } else {
-    message("Alle ANOVA-Ergebnisse zeigen signifikante Unterschiede zwischen den Clustern (p <= 0.05).")
-  }
-}
-
-# Ausgabe der ANOVA-Ergebnisse
-print(cat(output_name, ": ANOVA Ergebnisse für Cluster (k-Means und k-Medoids):"))
-print(anova_results)
-
-# ANOVA-Zusammenfassung
-check_anova_p_values(paste0(output_name, "_ANOVA.csv"))
-
-
 ### Hauptkomponentenanalysen (PCA-Plots) zur Interpretation der Clusterlagen ###
 
 #ggfs. Plotpakete installieren
@@ -567,3 +489,80 @@ dev.off()
 pca_result <- prcomp(data_numeric, scale. = TRUE)
 pca_result$rotation[, 1:2]  # Zeigt die Ladungen der ersten beiden PCs
 
+
+### Ergänzung ANOVA ###########################################################
+
+# ANOVA für Cluster basierend auf k-Means und k-Medoids
+anova_results <- data.frame(Variable = character(), 
+                            Cluster_Method = character(), 
+                            Df = integer(), 
+                            SumSq = numeric(), 
+                            MeanSq = numeric(), 
+                            FValue = numeric(), 
+                            Pr_F = numeric(), 
+                            stringsAsFactors = FALSE)
+
+# ANOVA für k-Means
+for (i in 1:ncol(data_numeric)) {
+  anova_result <- summary(aov(data_numeric[, i] ~ factor(data$Cluster_kMeans)))
+  df <- anova_result[[1]]$Df[1]
+  sum_sq <- anova_result[[1]]$`Sum Sq`[1]
+  mean_sq <- anova_result[[1]]$`Mean Sq`[1]
+  f_value <- anova_result[[1]]$`F value`[1]
+  p_value <- anova_result[[1]]$`Pr(>F)`[1]
+  
+  anova_results <- rbind(anova_results, 
+                         data.frame(Variable = colnames(data_numeric)[i],
+                                    Cluster_Method = "k-Means",
+                                    Df = df, 
+                                    SumSq = sum_sq, 
+                                    MeanSq = mean_sq, 
+                                    FValue = f_value, 
+                                    Pr_F = p_value))
+}
+
+# ANOVA für k-Medoids
+for (i in 1:ncol(data_numeric)) {
+  anova_result <- summary(aov(data_numeric[, i] ~ factor(data$Cluster_kMedoids)))
+  df <- anova_result[[1]]$Df[1]
+  sum_sq <- anova_result[[1]]$`Sum Sq`[1]
+  mean_sq <- anova_result[[1]]$`Mean Sq`[1]
+  f_value <- anova_result[[1]]$`F value`[1]
+  p_value <- anova_result[[1]]$`Pr(>F)`[1]
+  
+  anova_results <- rbind(anova_results, 
+                         data.frame(Variable = colnames(data_numeric)[i],
+                                    Cluster_Method = "k-Medoids",
+                                    Df = df, 
+                                    SumSq = sum_sq, 
+                                    MeanSq = mean_sq, 
+                                    FValue = f_value, 
+                                    Pr_F = p_value))
+}
+
+# Ausgabe der ANOVA-Ergebnisse als CSV
+write.csv2(anova_results, file = paste0(output_name, "_ANOVA.csv"), row.names = FALSE)
+
+# Funktion zur Überprüfung der p-Werte der ANOVA
+check_anova_p_values <- function(anova_csv_path) {
+  # Einlesen der ANOVA-Ergebnisse aus der CSV-Datei
+  anova_results <- read.csv2(anova_csv_path, header = TRUE, sep = ";", dec = ",")
+  
+  # Überprüfung auf p-Werte über 0,05
+  high_p_values <- anova_results[anova_results$Pr_F > 0.05, ]
+  
+  if (nrow(high_p_values) > 0) {
+    warning(paste("Die ANOVA-Ergebnisse zeigen, dass einige Variablen keinen signifikanten Unterschied zwischen den Clustern aufweisen (p > 0.05):",
+                  paste(high_p_values$Variable, collapse = ", "), 
+                  ". Bitte überprüfen Sie die betroffenen Variablen."))
+  } else {
+    message("Alle ANOVA-Ergebnisse zeigen signifikante Unterschiede zwischen den Clustern (p <= 0.05).")
+  }
+}
+
+# Ausgabe der ANOVA-Ergebnisse
+print(cat(output_name, ": ANOVA Ergebnisse für Cluster (k-Means und k-Medoids):"))
+print(anova_results)
+
+# ANOVA-Zusammenfassung
+check_anova_p_values(paste0(output_name, "_ANOVA.csv"))
