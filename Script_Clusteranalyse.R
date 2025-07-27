@@ -131,7 +131,7 @@ color_palette <- colorRampPalette(c("lightyellow", "darkred"))
 # funktioniert auch gut mit großen Datensätzen; k-Medoids ist robuster gegenüber
 # Ausreißern sowie unsymmetrischen Datenverteilungen und stabiler bei kleinen
 # Datensätzen. Im oben genannten Beispiel der Beethoven-Tondokumente wurde sich  
-# deshalb letztlich für die k-Medoids-Analyseergebnisse entschieden.
+# deshalb letztlich für eine Mischung aus beidem entschieden.
 
 
 ### k-Means-Clusteranalyse #####################################################
