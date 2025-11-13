@@ -1,5 +1,6 @@
 <b>Data Clustering via k-Means, k-Medoids, and PCA in R</b>  
-applicable to non-normally distributed datasets (e.g., in musical performance research)  
+applicable to non-normally distributed datasets 
+(e.g., in musical performance research)  
 Version 1.0 (08 March 2025) 
 compiled by Frithjof Vollmer  
 
