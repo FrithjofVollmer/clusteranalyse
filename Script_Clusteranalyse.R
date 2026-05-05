@@ -9,8 +9,8 @@
 #
 #
 # Das folgende kommentierte Skript gibt die Befehlskette für eine zweifache
-# Clusteranalyse von performanzbezogenen Daten wieder, wie sie vom Autor 
-# zur Analyse von Messdaten zu 57 Aufnahmen von Beethovens Violinkonzert 
+# Clusteranalyse von performanzbezogenen Daten wieder, wie sie für die 
+# Analyse von Messdaten zu 57 Aufnahmen von Beethovens Violinkonzert 
 # op. 61 (1912–1956) verwendet wurde.
 #
 #
