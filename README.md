@@ -4,8 +4,8 @@ applicable to non-normally distributed datasets
 Version 1.0 (08 March 2025)  
 compiled by Frithjof Vollmer  
 
-This script reproduces the command sequence for a dual cluster analysis of performance-related data, as 
-employed by the author in the analysis of measurement data from 57 recordings of Beethoven’s Violin Concerto, 
+This script reproduces the command sequence for a dual cluster analysis of performance-related data, 
+as employed in the analysis of measurement data from 57 recordings of Beethoven’s Violin Concerto, 
 Op. 61 (1912–1956). Explanatory comments in German.
 
 Core packages and functions:
